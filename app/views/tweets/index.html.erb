@@ -1,0 +1,48 @@
+<div class="jumbotron">
+  	<h4>Signed in as <strong><%= current_user.username %></strong></h4>
+    <div class="tweet">
+		<h4>Listing Tweets</h4>
+			<table>
+			 	<% @user.tweets.each do |t| %>
+				    <tr>
+				      <td><strong><%= current_user.username %></strong></td>
+				      <td><%= t.text %></strong></td>
+				      <td><%= link_to 'Show', user_tweet_path(@user,t) %></td>
+				      <td><%= link_to 'Delete', user_tweet_path(@user,t), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				    </tr>
+			 	<% end %>
+			</table>
+			
+			<table>
+			  <%if @users_following.present? %>
+				  <%@users_following.each do |uf|%>
+					  <% uf.tweets.each do |uft| %>
+					    <tr>
+					      <td><strong><%= uf.username %></strong></td>
+					      <td><%= uft.text %></strong></td>
+					    </tr>
+					    <%end%>
+				    <%end%>
+			  <% end %>
+			</table>
+			
+			<div class="border-form-div">
+	    		<%= form_for :tweet, url: user_tweets_path do |f| %>
+	    		  <p>
+				    <%= f.label :text %><br>
+				    <%= f.text_area :text %>
+				  </p>
+				  <p>
+				    <%= f.submit "Tweet" %>
+				  </p>
+	    		<% end %>	
+	    	</div>
+	    	<div class="jumbotron follow">
+				<h3>List Following</h3>
+				<% @users_following.each do |user| %>
+					<strong><%= user.username %></strong><br>
+				<% end %>
+				<%= link_to "Follow", following_user_path(@user), :class => 'btn btn-success' %>
+			</div>
+    </div>
+</div>

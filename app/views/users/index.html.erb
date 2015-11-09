@@ -1,0 +1,16 @@
+<div class="jumbotron follow">
+	<h3>Sign in as <strong><%= current_user.email %></strong></h3>
+	<div>
+		<h3>List Following</h3>
+		<% @users_following.each do |user| %>
+			<strong><%= user.username %></strong><br>
+		<% end %>
+	</div>
+	<div>
+		<h3>List Follower</h3>
+		<% @users_follower.each do |u| %>
+		 	<strong><%= u.username %></strong><br />
+		<% end %>
+	<%= link_to "Follow", following_user_path(@user), :class => 'btn btn-success' %>
+	</div>
+</div>

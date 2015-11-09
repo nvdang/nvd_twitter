@@ -1,0 +1,21 @@
+<div class="jumbotron">
+	<h4>Sign in as <strong><%= current_user.username %></strong></h4>
+	<div>
+	<table border="1" cellspacing="10" cellpadding="10" width="400px">
+	<% @users.each do |user| %>
+		<tr>
+		<td><%= user.username %></td>
+		<td><% if current_user.username == user.username%>
+		<% else %>
+			<% if current_user.following?(user) %>
+				<a><%= link_to "Unfollow", unfollow_user_path(user.to_param), :remote => true %></a>
+			<% else %>
+				<a><%= link_to "Follow", follow_user_path(user.to_param), :remote => true %></a>
+			<% end %>
+		<% end %></td>
+		</tr>
+	<% end %>
+	</table>
+</div>
+<%= link_to "List Follow", users_path, :class => 'btn btn-success' %>
+<%= link_to "Tweet", user_tweets_path(@user), :class => 'btn btn-success' %>

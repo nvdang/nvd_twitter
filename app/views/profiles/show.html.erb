@@ -1,0 +1,38 @@
+<div class="jumbotron">
+	<div class="profile">
+	    <% if current_user.profile.present? %>
+		   <h1>Profile</h1>
+		   <table border="1" cellspacing="10" cellpadding="10" width="400px">
+		   		<tr>
+			   		  <td><strong>Username</strong></td>
+			   		  <td><%= current_user.username %></td>
+		   		</tr>
+		   		<tr>
+			   		  <td><strong>Email</strong></td>
+			   		  <td><%= current_user.email %></td>
+		   		</tr>
+				<tr>
+					  <td><strong>Sex</strong></td>
+					  <td><%= @profile.sex %></td>
+				</tr>
+				<tr>
+					  <td><strong>Tel</strong></td>
+					  <td><%= @profile.tel %></td>
+				</tr>
+				<tr>
+					  <td><strong>Address</strong></td>
+					  <td><%= @profile.address %></td>
+				</tr>
+				<tr>
+					  <td><strong>Birthday</strong></td>
+					  <td><%= @profile.birthday %></td>
+				</tr>
+				<tr>
+					  <td><strong>Avatar</strong></td>
+					  <td><%= image_tag @profile.avatar.url, :width => 100, :height => 100%></td>
+				</tr>	
+			</table>
+			<%= link_to "Edit Profile", edit_user_profile_path(@user,@profile), :class => 'btn btn-success' %>
+		<% end %>
+	</div>
+</div>

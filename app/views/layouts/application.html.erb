@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Twitter</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container-narrow">
+  <div class="masthead">
+    <ul class="nav nav-pills pull-right">
+  <% if user_signed_in? %>
+    <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+  <% else %>
+    <li><%= link_to "Sign in", new_user_session_path %></li>
+    <li><%= link_to "Sign up", new_user_registration_path %></li>
+    <li><%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %></li>
+  <% end %>
+	</ul>
+    <h3 class="muted"><%= link_to "Twitter", root_path %></h3>
+  </div>
+  <hr />
+  
+  <%= yield %>
+  
+</div>
+</body>
+</html>

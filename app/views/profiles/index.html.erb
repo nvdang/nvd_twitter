@@ -1,0 +1,28 @@
+<div class="jumbotron">
+  <% if user_signed_in? %>
+	<h1>Welcome!</h1>
+	<p class="lead">
+		Signed in as <strong><%= current_user.username %></strong>
+	</p>
+    <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :class => 'btn btn-large btn-danger' %>
+    <%= link_to "Tweet", user_tweets_path(@user), :class => 'btn btn-success' %>
+    <% if current_user.profile.present? %>
+    	<%= link_to "Profile", user_profile_path(@user, @user), :class => 'btn btn-success' %>
+    <%else%>
+		<%= link_to "New Profile", new_user_profile_path(@user), :class => 'btn btn-success' %>
+	<% end %>
+    <%= link_to "List Follow", users_path(@user), :class => 'btn btn-success' %>
+  <% else %>
+	 <h1>Welcome, new user!</h1>
+	 <p class="lead">
+	    You must sign in or sign up!
+	 </p>
+	 <div class="row-fluid">
+	    <div class="span6">
+	       <%= link_to "Sign In", new_user_session_path, :class => "btn btn-success" %>
+	       <%= link_to "Sign Up", new_user_registration_path, :class => "btn btn-success" %>
+	       <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter), :class => "btn btn-success" %>
+	    </div>
+	 </div>
+  <% end %>
+</div>
