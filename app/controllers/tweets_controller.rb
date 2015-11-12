@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
   def index
     @user = current_user
-    @users_following = @user.all_following
+    @users_following = @user.following
   end
   
   def show

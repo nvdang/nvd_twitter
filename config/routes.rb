@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
       resources :users, only: [:index] do
         member do
-          get :follow
-          get :unfollow
-          post :follow
-          post :unfollow
           get :followers
           get :following
         end
@@ -13,8 +9,9 @@ Rails.application.routes.draw do
         resources :comments
         end
       end
-     
+      resources :relationships, only: [:create, :destroy]
   root 'profiles#index'
+   get 'users/:id/show' => 'users#show'
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

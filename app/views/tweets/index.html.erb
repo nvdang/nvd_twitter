@@ -10,23 +10,26 @@
 				      <td><%= link_to 'Show', user_tweet_path(@user,t) %></td>
 				      <td><%= link_to 'Delete', user_tweet_path(@user,t), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 				    </tr>
+				    <tr><td colspan="4">Posted <%= time_ago_in_words(t.created_at) %> ago.</tr>
 			 	<% end %>
 			</table>
 			
 			<table>
 			  <%if @users_following.present? %>
-				  <%@users_following.each do |uf|%>
+				  <% @users_following.each do |uf| %>
 					  <% uf.tweets.each do |uft| %>
 					    <tr>
 					      <td><strong><%= uf.username %></strong></td>
 					      <td><%= uft.text %></strong></td>
+					    </tr>
+					    <tr><td colspan="2">Posted <%= time_ago_in_words(uft.created_at) %> ago.</td>
 					    </tr>
 					    <%end%>
 				    <%end%>
 			  <% end %>
 			</table>
 			
-			<div class="border-form-div">
+			<div>
 	    		<%= form_for :tweet, url: user_tweets_path do |f| %>
 	    		  <p>
 				    <%= f.label :text %><br>
