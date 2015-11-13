@@ -1,51 +1,37 @@
 <div class="jumbotron">
   	<h4>Signed in as <strong><%= current_user.username %></strong></h4>
     <div class="tweet">
-		<h4>Listing Tweets</h4>
+		<h4>Listing Tweets</h4>	
+			<% @tweets.each do |t| %>
 			<table>
-			 	<% @user.tweets.each do |t| %>
-				    <tr>
-				      <td><strong><%= current_user.username %></strong></td>
-				      <td><%= t.text %></strong></td>
-				      <td><%= link_to 'Show', user_tweet_path(@user,t) %></td>
-				      <td><%= link_to 'Delete', user_tweet_path(@user,t), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-				    </tr>
-				    <tr><td colspan="4">Posted <%= time_ago_in_words(t.created_at) %> ago.</tr>
-			 	<% end %>
+				<tr><td width="80%"><%= t.text %></strong></td>
+				<td width="10%"><%= link_to 'Show', user_tweet_path(@user,t) %></td>
+				<td width="10%"><%= link_to 'Delete', user_tweet_path(@user,t), method: :delete, data: { confirm: 'Are you sure?' } %></td></tr>
+				<tr><td>Posted by <strong>@<%= current_user.username %></strong> <%= time_ago_in_words(t.created_at) %> ago.</td></tr>
 			</table>
-			
-			<table>
-			  <%if @users_following.present? %>
-				  <% @users_following.each do |uf| %>
-					  <% uf.tweets.each do |uft| %>
-					    <tr>
-					      <td><strong><%= uf.username %></strong></td>
-					      <td><%= uft.text %></strong></td>
-					    </tr>
-					    <tr><td colspan="2">Posted <%= time_ago_in_words(uft.created_at) %> ago.</td>
-					    </tr>
-					    <%end%>
-				    <%end%>
-			  <% end %>
-			</table>
-			
-			<div>
-	    		<%= form_for :tweet, url: user_tweets_path do |f| %>
-	    		  <p>
+			<% end %>
+	<div>
+	    	<%= form_for :tweet, url: user_tweets_path do |f| %>
+	    	<% if @tweet.errors.any? %>
+				<div id="error_explanation">
+				<h2>
+					<%= pluralize(@tweet.errors.count, "error") %>:
+				</h2>
+				<ul>
+					<% @tweet.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+					<% end %>
+				</ul>
+				</div>
+			<% end %>
+	    		 <p>
 				    <%= f.label :text %><br>
 				    <%= f.text_area :text %>
-				  </p>
-				  <p>
+				 </p>
+				 <p>
 				    <%= f.submit "Tweet" %>
-				  </p>
-	    		<% end %>	
-	    	</div>
-	    	<div class="jumbotron follow">
-				<h3>List Following</h3>
-				<% @users_following.each do |user| %>
-					<strong><%= user.username %></strong><br>
-				<% end %>
-				<%= link_to "Follow", following_user_path(@user), :class => 'btn btn-success' %>
-			</div>
+				 </p>
+	    	<% end %>	
+	    </div>
     </div>
 </div>

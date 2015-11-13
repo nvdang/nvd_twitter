@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  #has_many :tweets
   attr_accessor :login
   #acts_as_followable
   #acts_as_follower
@@ -22,7 +21,7 @@ class User < ActiveRecord::Base
   :uniqueness => {
     :case_sensitive => false
   }
-  
+ 
   validate :validate_username
 
   def validate_username
@@ -33,6 +32,11 @@ class User < ActiveRecord::Base
   
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
+         
+  #Feed
+  def feed
+    Tweet.from_users_followed_by(self)
+  end
          
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)

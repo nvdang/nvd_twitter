@@ -15,8 +15,11 @@ class ProfilesController < ApplicationController
   def create
     @user = current_user
       @profile = @user.build_profile(profile_params)
-      @profile.save
-      redirect_to user_profile_path(@user,@profile)
+      if @profile.save
+      redirect_to user_profile_path(@user, @profile)
+      else
+        render 'new'
+      end
   end
   
   def show
@@ -33,7 +36,7 @@ class ProfilesController < ApplicationController
     @user = current_user
     @profile = Profile.find(params[:id])
     if @profile.update_attributes(profile_params)    
-      redirect_to user_profile_path(@user,@profile)
+      redirect_to user_profile_path(@user, @profile)
     else      
       render 'edit'
     end

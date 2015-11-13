@@ -4,18 +4,18 @@
 	<table border="1" cellspacing="10" cellpadding="10" width="400px">
 	<% @users.each do |user| %>
 		<tr>
-			<td><%= user.username %></td>
+			<td><strong><%= user.username %></strong></td>
 			<td><% if current_user.username == user.username %>
 			<% else %>
 				<% if current_user.following?(user) %>
 					<%= form_for(current_user.active_relationships.find_by(followed_id: user.id),
 	             	html: { method: :delete }, remote: true) do |f| %>
-				  		<%= f.submit "Unfollow", class: "btn" %>
+				  		<%= f.submit "Unfollow", class: "btn btn-success" %>
 					<% end %>
 				<% else %>
 					<%= form_for(current_user.active_relationships.build, remote: true) do |f| %>
 				  		<div><%= hidden_field_tag :followed_id, user.id %></div>
-				  	<%= f.submit "Follow", class: "btn" %>
+				  	<%= f.submit "Follow", class: "btn btn-success" %>
 					<% end %>
 				<% end %>
 			<% end %></td>
@@ -23,5 +23,5 @@
 	<% end %>
 	</table>
 </div>
-<%= link_to "List Follow", users_path, :class => 'btn btn-success' %>
+
 

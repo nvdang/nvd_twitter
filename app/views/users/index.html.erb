@@ -4,6 +4,15 @@
 	    <strong><%= @user.following.count %></strong> following
 	  </a>
    	<strong><%= @user.followers.count %></strong> followers
+   	<div class="tweet">
+   		<h3>Timeline</h3>
+   		<% @tweets.each do |t| %>
+   		<table>
+   			<tr><td><%= t.text %></td></tr>
+   			<tr><td>Posted by <strong>@<%= t.user.username %></strong> <%= time_ago_in_words(t.created_at) %> ago.</td></tr>
+   		</table>
+   		<% end %>
+   	</div>
     <div>
     	<h3>List Following</h3>
    		<% @users_following.each do |uf| %>
@@ -16,4 +25,5 @@
 			<strong><%= ur.username%></strong><br />
 		<% end %>
 	</div>
+	<%= link_to "Tweet", user_tweets_path(@user), :class => 'btn btn-success' %>
 </div>

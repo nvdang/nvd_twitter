@@ -57,12 +57,12 @@ table{
 }
 
 .tweet table{
+	width: 600px;
 	margin-left: 5px;
+	border-bottom: 1px solid #FF0000;
 }
 
-.tweet table tr td{
-	padding-right: 10px;
-}
+
 .text{
 	color: red;
 }

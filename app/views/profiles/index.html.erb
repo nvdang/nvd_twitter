@@ -11,7 +11,7 @@
     <%else%>
 		<%= link_to "New Profile", new_user_profile_path(@user), :class => 'btn btn-success' %>
 	<% end %>
-    <%= link_to "List Follow", users_path(@user), :class => 'btn btn-success' %>
+    <%= link_to "Timeline", users_path(@user), :class => 'btn btn-success' %>
   <% else %>
 	 <h1>Welcome, new user!</h1>
 	 <p class="lead">

@@ -1,6 +1,18 @@
 <div class="border-form-div">
 	<h4 align="center">New Profile</h4>
     <%= form_for @profile, url: user_profiles_path(@user,@profile), html: { multipart: true } do |f| %>
+    <% if @profile.errors.any? %>
+				<div id="error_explanation">
+				<h2>
+					<%= pluralize(@profile.errors.count, "error") %>:
+				</h2>
+				<ul>
+					<% @profile.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+					<% end %>
+				</ul>
+				</div>
+	<% end %>
     	<p>
 			<%= f.label :sex %><br>
 			<%= f.text_field :sex %>
