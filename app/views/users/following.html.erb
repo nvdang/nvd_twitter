@@ -4,8 +4,12 @@
 	<table border="1" width="300px">
 	<% @users.each do |user| %>
 		<tr>
+		<% if user.profile.present? %>
 			<td><p class="image"><%= image_tag user.profile.avatar.url, :width => 50, :height => 50 %></p>
-				<h5><%= user.username %></h5></td>
+			<h5><%= user.username %></h5></td>
+		<% else %>
+			<td><h5><%= user.username %></h5></td>
+		<%end%>
 			<td><% if current_user.username == user.username %>
 			<% else %>
 				<% if current_user.following?(user) %>
