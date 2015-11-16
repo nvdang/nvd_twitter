@@ -14,7 +14,7 @@
  *= require_self
  */
 body{
-	width: 700px;
+	width: 800px;
 	margin: 0px 250px;
 }
 .jumbotron{
@@ -57,11 +57,15 @@ table{
 }
 
 .tweet table{
-	width: 600px;
+	width: 500px;
 	margin-left: 5px;
 	border-bottom: 1px solid #FF0000;
+	margin-top: 10px;
 }
 
+.profile table tr td{
+	padding: 20px 0px;
+}
 
 .text{
 	color: red;
@@ -69,4 +73,15 @@ table{
 
 .follow h3{
 	color: blue;
+}
+.image{
+	float: left;
+	padding-right: 10px;
+}
+
+.tfield{
+	padding: 10px 20px 20px;
+ 	margin: 0 auto 20px;
+  	background-color: #fff;
+  	border: 1px solid #e5e5e5;
 }

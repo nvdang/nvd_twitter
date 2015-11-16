@@ -1,10 +1,11 @@
 <div class="jumbotron">
 	<h4>Sign in as <strong><%= current_user.username %></strong></h4>
 	<div>
-	<table border="1" cellspacing="10" cellpadding="10" width="400px">
+	<table border="1" width="300px">
 	<% @users.each do |user| %>
 		<tr>
-			<td><strong><%= user.username %></strong></td>
+			<td><p class="image"><%= image_tag user.profile.avatar.url, :width => 50, :height => 50 %></p>
+				<h5><%= user.username %></h5></td>
 			<td><% if current_user.username == user.username %>
 			<% else %>
 				<% if current_user.following?(user) %>
@@ -22,6 +23,7 @@
 		</tr>
 	<% end %>
 	</table>
+	<%= link_to "Back", users_path, :class => "btn btn-success" %>
 </div>
 
 

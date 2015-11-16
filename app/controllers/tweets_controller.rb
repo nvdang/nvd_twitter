@@ -1,8 +1,8 @@
 class TweetsController < ApplicationController
   def index
-    @tweet = Tweet.new
     @user = current_user
-    @tweets = @user.tweets.order("created_at DESC")
+    @tweet = @user.tweets.build
+    @tweets = current_user.feed.order("created_at DESC")
   end
   
   def show
@@ -12,9 +12,13 @@ class TweetsController < ApplicationController
   
   def create
     @user = current_user
-    @tweet = @user.tweets.new(tweet_params)
-    @tweet.save
+    @tweet = @user.tweets.build(tweet_params)
+    if @tweet.save
     redirect_to user_tweets_path
+    else
+      flash[:error] = "Text field can't be blank or too long"
+      redirect_to user_tweets_path
+    end
   end
   
   def destroy

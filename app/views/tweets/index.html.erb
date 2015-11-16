@@ -1,37 +1,55 @@
-<div class="jumbotron">
-  	<h4>Signed in as <strong><%= current_user.username %></strong></h4>
-    <div class="tweet">
-		<h4>Listing Tweets</h4>	
-			<% @tweets.each do |t| %>
-			<table>
-				<tr><td width="80%"><%= t.text %></strong></td>
-				<td width="10%"><%= link_to 'Show', user_tweet_path(@user,t) %></td>
-				<td width="10%"><%= link_to 'Delete', user_tweet_path(@user,t), method: :delete, data: { confirm: 'Are you sure?' } %></td></tr>
-				<tr><td>Posted by <strong>@<%= current_user.username %></strong> <%= time_ago_in_words(t.created_at) %> ago.</td></tr>
-			</table>
-			<% end %>
-	<div>
-	    	<%= form_for :tweet, url: user_tweets_path do |f| %>
-	    	<% if @tweet.errors.any? %>
-				<div id="error_explanation">
-				<h2>
-					<%= pluralize(@tweet.errors.count, "error") %>:
-				</h2>
-				<ul>
-					<% @tweet.errors.full_messages.each do |msg| %>
-					<li><%= msg %></li>
-					<% end %>
-				</ul>
-				</div>
+<div>
+  	<aside class="col-md-4">
+    <section>
+    <% if current_user.profile.present? %>
+      <p class="image"><%= image_tag @user.profile.avatar.url, :width => 100, :height => 100 %></p>
+      <h3><%= @user.username %></h3>
+      <span><%= link_to "Profile", user_profile_path(@user, @user) %></span>
+     <% end %>
+    </section>
+    <section>
+      <div>
+		<a href="<%= following_user_path(@user) %>">
+		    <strong id="following">
+		      <%= @user.following.count %>
+		    </strong>
+		    following<br />
+		  </a>
+		    <strong id="followers">
+		      <%= @user.followers.count %>
+		    </strong>
+		     followers
+		</div>
+		<div class="tfield">
+	    	<%= form_for([@user, @user.tweets.build]) do |f| %>
+	    	<% flash.each do |key, value| %>
+			  <div class="alert alert-<%= key %>">
+			    <a href="#" data-dismiss="alert" class="close">×</a>
+			    <font color="red"><%= value %></font>
+			  </div>
 			<% end %>
 	    		 <p>
-				    <%= f.label :text %><br>
-				    <%= f.text_area :text %>
+				    <%= f.text_area :text, size: "25x5" %>
 				 </p>
 				 <p>
 				    <%= f.submit "Tweet" %>
 				 </p>
 	    	<% end %>	
 	    </div>
+    </section>
+  </aside>
+    <div class="col-md-8 tweet">
+		<h4>Timeline</h4>	
+			<% @tweets.each do |t| %>
+			<table>
+				<tr>
+				<td width="80%"><p class="image"><%= image_tag t.user.profile.avatar.url, :width => 50, :height => 50 %></p><%= t.text %></td>
+				<% if t.user == current_user %>
+				<td width="10%"><%= link_to 'Show', user_tweet_path(@user,t) %></td>
+				<td width="10%"><%= link_to 'Delete', user_tweet_path(@user,t), method: :delete, data: { confirm: 'Are you sure?' } %></td></tr>
+				<% end %>
+				<tr><td>Posted by <strong>@<%= t.user.username %></strong> <%= time_ago_in_words(t.created_at) %> ago.</td></tr>
+			</table>
+			<% end %>
     </div>
 </div>

@@ -13,26 +13,26 @@
 		   		</tr>
 				<tr>
 					  <td><strong>Sex</strong></td>
-					  <td><%= @profile.sex %></td>
+					  <td><%= @user.profile.sex %></td>
 				</tr>
 				<tr>
 					  <td><strong>Tel</strong></td>
-					  <td><%= @profile.tel %></td>
+					  <td><%= @user.profile.tel %></td>
 				</tr>
 				<tr>
 					  <td><strong>Address</strong></td>
-					  <td><%= @profile.address %></td>
+					  <td><%= @user.profile.address %></td>
 				</tr>
 				<tr>
 					  <td><strong>Birthday</strong></td>
-					  <td><%= @profile.birthday %></td>
+					  <td><%= @user.profile.birthday %></td>
 				</tr>
 				<tr>
 					  <td><strong>Avatar</strong></td>
-					  <td><%= image_tag @profile.avatar.url, :width => 100, :height => 100%></td>
+					  <td><%= image_tag @user.profile.avatar.url, :width => 100, :height => 100%></td>
 				</tr>	
 			</table>
-			<%= link_to "Edit Profile", edit_user_profile_path(@user,@profile), :class => 'btn btn-success' %>
+			<%= link_to "Edit Profile", edit_user_profile_path(@user, @user.profile), :class => 'btn btn-success' %>
 		<% end %>
 	</div>
 </div>

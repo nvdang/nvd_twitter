@@ -7,8 +7,6 @@ class ProfilesController < ApplicationController
     if not current_user.profile.present?
       @user = current_user
       @profile = @user.build_profile
-    else 
-      redirect_to root_path(@user)
     end
   end
   
