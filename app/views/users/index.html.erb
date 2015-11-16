@@ -30,8 +30,12 @@
 			<% @users_following.each do |uf| %>
 					<tr>
 						<td>
-							<p class="image"><%= image_tag uf.profile.avatar.url, :width => 50, :height => 50 %></p>
-							<h5><%= uf.username %></h5>
+							<% if uf.profile.present? %>
+								<p class="image"><%= image_tag uf.profile.avatar.url, :width => 50, :height => 50 %></p>
+								<h5><%= uf.username %></h5>
+							<% else %>
+								<h5><%= uf.username %></h5>
+							<% end %>
 						</td>
 					</tr>
 			<% end %>
@@ -46,8 +50,12 @@
 					
 						<tr>
 							<td>
+							<% if uf.profile.present? %>
 								<p class="image"><%= image_tag uf.profile.avatar.url, :width => 50, :height => 50 %></p>
 								<h5><%= uf.username %></h5>
+							<% else %>
+								<h5><%= uf.username %></h5>
+							<% end %>
 							</td>
 						</tr>
 					
