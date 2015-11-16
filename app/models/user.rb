@@ -54,25 +54,6 @@ class User < ActiveRecord::Base
     followers.include?(other_user)
   end
   
-  def self.find_for_twitter_oauth(auth, signed_in_resource=nil)
-    user = User.where(:provider => auth.provider, :uid => auth.uid).first
-    if user
-      return user
-    else
-      registered_user = User.where(:email => auth.uid + "@twitter.com").first
-      if registered_user
-        return registered_user
-      else
-        user = User.create(email:auth.extra.raw_info.email,
-                            provider:auth.provider,
-                            uid:auth.uid,
-                            email:auth.uid+"@twitter.com",
-                            password:Devise.friendly_token[0,20],
-                          )
-      end
-    end
-  end
-  
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
