@@ -15,7 +15,7 @@
 	<% end %>
     	<p>
 			<%= f.label :sex %><br>
-			<%= f.text_field :sex %>
+			<%= f.select(:sex, options_for_select([['Male', 'Male'], ['Female', 'Female']], 'Male')) %>
 		</p>
 		<p>
 			<%= f.label :tel %><br>
@@ -31,10 +31,10 @@
 		</p>
 		<p>
 			<%= f.label :birthday %><br>
-			<%= f.date_select :birthday %>
+			<%= f.date_select :birthday, {start_year: Time.now.year, end_year: 1900, order: [:month, :day, :year]} %>
 		</p>
 		<p>
-		    <p align="center"><%= f.submit  %></p>
+		    <p align="center"><%= f.submit %></p>
 		</p>
     <% end %>	
 </div>

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       end
       resources :relationships, only: [:create, :destroy]
   root 'profiles#index'
-   get 'users/:id/show' => 'users#show'
+  get 'users/:id/show' => 'users#show'
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

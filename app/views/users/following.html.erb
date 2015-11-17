@@ -1,32 +1,34 @@
 <div class="jumbotron">
-	<h4>Sign in as <strong><%= current_user.username %></strong></h4>
-	<div>
-	<table border="1" width="300px">
+	<h4>Sign in as <strong>@<%= current_user.username %></strong></h4>
+	<div class="following">
+	<table border="1" width="500px">
 	<% @users.each do |user| %>
 		<tr>
 		<% if user.profile.present? %>
-			<td><p class="image"><%= image_tag user.profile.avatar.url, :width => 50, :height => 50 %></p>
-			<h5><%= user.username %></h5></td>
+			<td width="50%"><%= image_tag user.profile.avatar.url, :width => 50, :height => 50, :class => "image3" %>
+			<strong>@<%= user.username %></strong></td>
 		<% else %>
-			<td><h5><%= user.username %></h5></td>
+			<td width="50%"><%= image_tag "default.png", :width => 50, :height => 50, :class => "image3" %>
+			<strong>@<%= user.username %></strong></td>
 		<%end%>
-			<td><% if current_user.username == user.username %>
+			<td width="50%"><% if current_user.username == user.username %>
 			<% else %>
 				<% if current_user.following?(user) %>
 					<%= form_for(current_user.active_relationships.find_by(followed_id: user.id),
 	             	html: { method: :delete }) do |f| %>
-				  		<%= f.submit "Unfollow", class: "btn btn-success", :disable_with => "Creating..." %>
+				  		<%= f.submit "Unfollow", class: "btn btn-danger btn1"%>
 					<% end %>
 				<% else %>
 					<%= form_for(current_user.active_relationships.build) do |f| %>
 				  		<div><%= hidden_field_tag :followed_id, user.id %></div>
-				  	<%= f.submit "Follow", class: "btn btn-success" %>
+				  	<%= f.submit "Follow", class: "btn btn-success btn1" %>
 					<% end %>
 				<% end %>
 			<% end %></td>
 		</tr>
 	<% end %>
 	</table>
+	</div>
 	<%= link_to "Back", users_path, :class => "btn btn-success" %>
 </div>
 
