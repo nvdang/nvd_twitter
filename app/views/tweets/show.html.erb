@@ -10,8 +10,7 @@
 		<p>
 			<strong><%= c.commenter %>:</strong>
 			<%= c.text %>
-			
-			<%= link_to 'Delete', [@user, c.tweet, c],
+			<%= link_to 'X', [@user, c.tweet, c],
                method: :delete,
                data: { confirm: 'Are you sure?' } %>
 		</p>

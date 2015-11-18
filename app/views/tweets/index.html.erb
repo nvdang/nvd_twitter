@@ -11,12 +11,12 @@
 	    <% end %>
 	      <div>
 			<a href="<%= following_user_path(@user) %>">
-			    <strong id="following" class="stat">
+			    <strong id="following">
 			      <%= @user.following.count %>
 			    </strong>
 			    following<br />
 			  </a>
-			    <strong id="followers" class="stat">
+			    <strong id="followers">
 			      <%= @user.followers.count %>
 			    </strong>
 			     followers
@@ -40,7 +40,7 @@
   	</div>
     <div class="col-md-8 tweet">
 		<h4>Timeline</h4>	
-			<% @tweets.each do |t| %>
+		<% @tweets.each do |t| %>
 			<table>
 				<tr>
 				<% if t.user.profile.present? %>
@@ -50,9 +50,11 @@
 				<% end %>
 				<% if t.user == current_user %>
 					<td width="5%"><%= link_to 'X', user_tweet_path(@user, t), method: :delete, data: { confirm: 'Are you sure?' } %></td></tr>
+					<tr><td colspan="2">Posted by <strong>@<%= t.user.username %></strong> <%= time_ago_in_words(t.created_at) %> ago.</td></tr>
+				<% else %>
+					<tr><td>Posted by <strong>@<%= t.user.username %></strong> <%= time_ago_in_words(t.created_at) %> ago.</td></tr>
 				<% end %>
-				<tr><td>Posted by <strong>@<%= t.user.username %></strong> <%= time_ago_in_words(t.created_at) %> ago.</td></tr>
 			</table>
-			<% end %>
+		<% end %>
     </div>
 </div>

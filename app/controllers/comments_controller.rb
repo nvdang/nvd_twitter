@@ -1,9 +1,10 @@
 class CommentsController < ApplicationController
   def create
     @user = current_user
-    @tweet = @user.tweets.find(params[:tweet_id])
+    #@tweet = @user.tweets.find(params[:tweet_id])
+    @tweet = Tweet.find(params[:tweet_id])
     @comment = @tweet.comments.create(comment_params)
-    redirect_to user_tweet_path(@user,@tweet)
+    redirect_to user_tweet_path(@user)
   end
   
   def destroy
@@ -11,9 +12,9 @@ class CommentsController < ApplicationController
     @tweet = @user.tweets.find(params[:tweet_id])
     @comment = @tweet.comments.find(params[:id])
     @comment.destroy
-    redirect_to user_tweet_path(@user,@tweet)
+    redirect_to user_tweet_path(@user)
   end
-  
+ 
    private
     def comment_params
       params.require(:comment).permit(:commenter, :text)
