@@ -1,22 +1,28 @@
 class CommentsController < ApplicationController
   def create
-    @user = current_user
-    #@tweet = @user.tweets.find(params[:tweet_id])
     @tweet = Tweet.find(params[:tweet_id])
-    @comment = @tweet.comments.create(comment_params)
-    redirect_to user_tweet_path(@user)
+    @comment = Comment.create(comment_params)
+    @comment.tweet = @tweet
+    @comment.user = current_user
+    if @comment.save
+       redirect_to user_tweets_path
+    else
+       flash[:error] = "Reply with text field can't be blank or too long"
+       redirect_to user_tweets_path
+    end
   end
   
   def destroy
-    @user = current_user
-    @tweet = @user.tweets.find(params[:tweet_id])
-    @comment = @tweet.comments.find(params[:id])
+    @tweet = Tweet.find(params[:tweet_id])
+    @comment = Comment.find(params[:id])
+    @comment.tweet = @tweet
+    @comment.user = current_user
     @comment.destroy
-    redirect_to user_tweet_path(@user)
+    redirect_to user_tweets_path
   end
  
    private
     def comment_params
-      params.require(:comment).permit(:commenter, :text)
+      params.require(:comment).permit(:commenter, :text, :user_id)
     end
 end

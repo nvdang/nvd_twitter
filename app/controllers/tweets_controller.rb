@@ -16,7 +16,7 @@ class TweetsController < ApplicationController
     if @tweet.save
     redirect_to user_tweets_path
     else
-      flash[:error] = "Text field can't be blank or too long"
+      flash[:error] = "Text field can't be blank or too longs"
       redirect_to user_tweets_path
     end
   end
