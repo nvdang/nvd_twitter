@@ -1,6 +1,15 @@
 class ProfilesController < ApplicationController
   def index
     @user = current_user
+    if user_signed_in?
+      if current_user.profile.present?
+        @url = current_user.profile.avatar.url
+        @path = user_profile_path(@user, @user.profile)
+      else
+        @url = "default.png"
+        @path = new_user_profile_path(@user)
+      end
+    end
   end
   
   def new

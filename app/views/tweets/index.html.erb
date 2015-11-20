@@ -1,40 +1,26 @@
 <div>
   	<div class="col-md-4 block">
-	    <% if current_user.profile.present? %>
-	      <p class="image"><%= image_tag @user.profile.avatar.url, :width => 90, :height => 90, :class => "image2" %></p>
+		<p class="image"><%= image_tag @url, width: 90, height: 90, class: "image2" %></p>
 	      <strong>@<%= @user.username %></strong><br />
-	      <span><%= link_to "View Profile", user_profile_path(@user, @user.profile) %></span>
-	    <% else %>
-	      <p class="image"><%= image_tag "default.png", :width => 90, :height => 90, :class => "image2" %></p>
-	      <strong>@<%= @user.username %></strong><br />
-	      <span><%= link_to "New Profile", new_user_profile_path(@user) %></span>
-	    <% end %>
+	      <span><%= link_to "Profile", @path %></span>
 	      <div>
 			<a href="<%= following_user_path(@user) %>">
-			    <strong id="following">
-			      <%= @user.following.count %>
-			    </strong>
-			    following<br />
+				<strong id="following"><%= @user.following.count %></strong> following<br />
 			</a>
-			    <strong id="followers">
-			      <%= @user.followers.count %>
-			    </strong>
-			     followers
+			<strong id="followers"><%= @user.followers.count %> </strong>followers
 		</div>
 		<div class="tfield">
-	    	<%= form_for([@user, @user.tweets.build]) do |f| %>
+	    	<%= form_for([@user, @user.tweets.build], html: { multipart: true }) do |f| %>
+	    	<% if flash[:error] %>
 	    	<% flash.each do |key, value| %>
 			  <div class="alert alert-<%= key %>">
 			    <a href="#" data-dismiss="alert" class="close">×</a>
 			    <font color="red"><%= value %></font>
 			  </div>
 			<% end %>
-	    		 <p>
-				    <%= f.text_area :text, size: "25x5" %>
-				 </p>
-				 <p>
-				    <%= f.submit "Tweet" %>
-				 </p>
+			<% end %>
+	    		<p><%= f.text_area :text, size: "32x5" %></p>
+				<p><%= f.submit "Tweet" %></p>
 	    	<% end %>	
 	    </div>
   	</div>
@@ -44,65 +30,64 @@
 			<table>
 				<tr>
 				<% if t.user.profile.present? %>
-					<td><p class="image"><%= image_tag t.user.profile.avatar.url, :width => 60, :height => 60, :class => "image2" %></p>
+					<td>
+					<p class="image"><%= image_tag t.user.profile.avatar.url, width: 60, height: 60, class: "image2" %></p>
 					Post by <strong>@<%= t.user.username %></strong> <%= time_ago_in_words(t.created_at) %> ago.<br />
-					<font color="blue"><%= t.text %></font>
+					<font color="blue"><%= t.text %></font><br />
 					<% if t.user == current_user %>
 						<%= link_to 'X', user_tweet_path(@user, t), method: :delete, 
 						data: { confirm: 'Are you sure?' } %>
-					<%end%>
+					<% end %>
 					</td>
-					<% else %>
-					<td><p class="image"><%= image_tag "default.png", :width => 60, :height => 60, :class => "image2" %></p>
+				<% else %>
+					<td>
+					<p class="image"><%= image_tag "default.png", width: 60, height: 60, class: "image2" %></p>
 					Post by <strong>@<%= t.user.username %></strong> <%= time_ago_in_words(t.created_at) %> ago.<br />
 					<font color="blue"<%= t.text %></font>
 					<% if t.user == current_user %>
 						<%= link_to 'X', user_tweet_path(@user, t), method: :delete, 
 						data: { confirm: 'Are you sure?' } %>
-					<%end%>
+					<% end %>
 					</td>
 				<% end %>
 				</tr>
 				<tr>
 					<td>
-						<%= form_for([t.user, t, t.user.comments.build]) do |fc| %>
-						  <p>
-						    <%= fc.text_area :text, size: "78x2" %>
-						  </p>
-						  <p>
-						    <%= fc.submit "Reply"%>
-						  </p>
-						<% end %>
+					<%= form_for([t.user, t, t.user.comments.build]) do |fc| %>
+						<p><%= fc.text_area :text, size: "78x2" %></p>
+						<p><%= fc.submit "Reply"%></p>
+					<% end %>
 					</td>
 				</tr>
-				
 				<tr>
 					<td>
-						<% t.comments.each do |c| %>
-						 <tr class="reply">
-							<% if c.user.profile.present? %>
-								<td><p class="image"><%= image_tag c.user.profile.avatar.url, :width => 60, :height => 60, :class => "image2" %></p>
-								Reply by <strong>@<%= c.user.username %></strong> <%= time_ago_in_words(c.created_at) %> ago.<br />
-								<%= c.text %>
-								<% if c.user == current_user %>
-								<%= link_to 'X', [c.user, c.tweet, c],
-               									method: :delete,
-               									data: { confirm: 'Are you sure?' } %>
-               					<% end %>
-								</td>
-								<% else %>
-								<td><p class="image"><%= image_tag "default.png", :width => 60, :height => 60, :class => "image2" %></p>
-								Reply by <strong>@<%= c.user.username %></strong> <%= time_ago_in_words(c.created_at) %> ago.<br />
-								<%= c.text %>
-								<% if c.user == current_user %>
-								<%= link_to 'X', [c.user, c.tweet, c],
-               									method: :delete,
-               									data: { confirm: 'Are you sure?' } %>
-               					<% end %>
-								</td>
-							<% end %>
-						</tr>
-						<% end %>
+					<% t.comments.each do |c| %>
+					<tr class="reply">
+					<% if c.user.profile.present? %>
+						<td>
+						<p class="image"><%= image_tag c.user.profile.avatar.url, width: 60, height: 60, class: "image2" %></p>
+						Reply by <strong>@<%= c.user.username %></strong> <%= time_ago_in_words(c.created_at) %> ago.<br />
+						<%= c.text %>
+						<% if c.user == current_user %>
+							<%= link_to 'X', [c.user, c.tweet, c],
+               								method: :delete,
+               								data: { confirm: 'Are you sure?' } %>
+               			<% end %>
+						</td>
+						<% else %>
+						<td>
+						<p class="image"><%= image_tag "default.png", width: 60, height: 60, class: "image2" %></p>
+						Reply by <strong>@<%= c.user.username %></strong> <%= time_ago_in_words(c.created_at) %> ago.<br />
+						<%= c.text %>
+						<% if c.user == current_user %>
+							<%= link_to 'X', [c.user, c.tweet, c],
+               								method: :delete,
+               								data: { confirm: 'Are you sure?' } %>
+               			<% end %>
+						</td>
+					<% end %>
+					</tr>
+					<% end %>
 					</td>
 				</tr>
 			</table>

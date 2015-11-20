@@ -3,17 +3,12 @@
 	<h1>Welcome!</h1>
 	<p class="lead">
 		Signed in as <strong><%= current_user.username %></strong><br />
-	<% if current_user.profile.present? %>
-		 <p><%= image_tag @user.profile.avatar.url, :width => 100, :height => 100, :class => "image1" %></p>
-    </p> 
-    	<%= link_to "Profile", user_profile_path(@user, @user.profile), :class => 'btn btn-success' %>
-    <%else%>
-    	<p><%= image_tag "default.png", :width => 100, :height => 100, :class => "image1" %></p>
-		<%= link_to "New Profile", new_user_profile_path(@user), :class => 'btn btn-success' %>
-	<% end %>
-    <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :class => 'btn btn-large btn-danger' %>
-    <%= link_to "Timeline", user_tweets_path(@user), :class => 'btn btn-success' %>
-    <%= link_to "Follow", users_path(@user), :class => 'btn btn-success' %>
+		 <p><%= image_tag @url, width: 100, height: 100, class: "image1" %></p>
+	</p> 
+    <%= link_to "Profile", @path, class: 'btn btn-success' %>
+    <%= link_to "Timeline", user_tweets_path(@user), class: 'btn btn-success' %>
+    <%= link_to "Follow", users_path(@user), class: 'btn btn-success' %>
+    <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'btn btn-large btn-danger' %>
   <% else %>
 	 <h1>Welcome, new user!</h1>
 	 <p class="lead">
@@ -21,8 +16,8 @@
 	 </p>
 	 <div class="row-fluid">
 	    <div class="span6">
-	       <%= link_to "Sign In", new_user_session_path, :class => "btn btn-success" %>
-	       <%= link_to "Sign Up", new_user_registration_path, :class => "btn btn-success" %>
+	       <%= link_to "Sign In", new_user_session_path, class: "btn btn-success" %>
+	       <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-success" %>
 	    </div>
 	 </div>
   <% end %>
