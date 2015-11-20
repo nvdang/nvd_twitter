@@ -32,6 +32,7 @@ gem 'twitter'
 gem 'bootstrap-sass-rails'
 gem 'paperclip'
 gem 'pry'
+gem 'carrierwave'
 # gem 'acts_as_follower'
 # Use Unicorn as the app server
 # gem 'unicorn'

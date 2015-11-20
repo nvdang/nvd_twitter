@@ -131,6 +131,23 @@ table{
 .alert{
 	padding: 0px;
 }
+
 .close{
 	padding-right: 10px;
+}
+
+.picture{
+	margin-top: 10px;
+	max-width: 410px;
+	max-height: 250px;
+}
+
+.freply{
+	margin-top: 20px;
+	margin-left: 70px;
+}
+
+.lreply{
+	margin-left: 70px;
+	font-size: 13px;
 }
