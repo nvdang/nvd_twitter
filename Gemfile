@@ -33,7 +33,7 @@ gem 'bootstrap-sass-rails'
 gem 'paperclip'
 gem 'pry'
 gem 'carrierwave'
-# gem 'acts_as_follower'
+gem 'jquery-ui-rails'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

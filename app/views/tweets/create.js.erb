@@ -1,0 +1,4 @@
+$('#p_tweet').bind('ajax:success', function() {
+	$("#p_tweet").html("<%= escape_javascript(render partial: "form_tweet") %>");
+});
+

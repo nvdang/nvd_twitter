@@ -67,5 +67,8 @@ class User < ActiveRecord::Base
       end
     end
   end
-    
+  
+  def self.search(term)
+    where('username like ?', "%#{term}%")
+  end
 end

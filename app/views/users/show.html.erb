@@ -1,0 +1,22 @@
+<div class="col-md-4 block">
+		<p class="image"><%= image_tag @url, width: 90, height: 90, class: "image2" %></p>
+	      <strong><%= @user.username %></strong><br />
+	      <div>
+			<strong id="following"><%= @user.following.count %></strong> following<br />
+			<strong id="followers"><%= @user.followers.count %> </strong>followers
+		</div>
+</div>
+<div class="col-md-8 tweet">
+	<h4>Tweets</h4>
+	<% @user.tweets.each do |t| %>
+			<table>
+				<tr>
+					<td>
+					<p class="image"><%= image_tag @url, width: 60, height: 60, class: "image2" %></p>
+					Post <%= time_ago_in_words(t.created_at) %> ago.<br />
+					<font color="blue"><%= t.text %></font>
+					<br /><% if t.picture? %><%= image_tag t.picture.url, class: "picture" %><% end %>
+					</td>
+				</tr>
+	<% end %>
+<div>

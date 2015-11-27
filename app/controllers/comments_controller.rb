@@ -18,7 +18,12 @@ class CommentsController < ApplicationController
     @comment.tweet = @tweet
     @comment.user = current_user
     @comment.destroy
-    redirect_to user_tweets_path
+    respond_to do |format|
+      format.html { redirect_to user_tweets_url }
+      format.json { head :no_content }
+      format.js   { render :layout => false }
+    end
+    #redirect_to user_tweets_path
   end
  
    private

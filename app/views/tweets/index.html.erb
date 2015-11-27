@@ -1,16 +1,18 @@
-<div>
-  	<div class="col-md-4 block">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<div class="col-md-4 block">
 		<p class="image"><%= image_tag @url, width: 90, height: 90, class: "image2" %></p>
-	      <strong>@<%= @user.username %></strong><br />
-	      <span><%= link_to "Profile", @path %></span>
-	      <div>
+	      <%= link_to @user.username, show_path(@user) %></strong><br />
+	      <span><%= link_to "profile", @path %></span>
+	    <div>
 			<a href="<%= following_user_path(@user) %>">
 				<strong id="following"><%= @user.following.count %></strong> following<br />
 			</a>
 			<strong id="followers"><%= @user.followers.count %> </strong>followers
 		</div>
 		<div class="tfield">
-	    	<%= form_for([@user, @user.tweets.build], html: { multipart: true }) do |f| %>
+	    	<%= form_for([@user, @user.tweets.build], html: { multipart: true, id: "p_tweet" }) do |f| %>
 	    	<% if flash[:error] %>
 	    	<% flash.each do |key, value| %>
 			  <div class="alert alert-<%= key %>">
@@ -23,65 +25,9 @@
 				<p><%= f.file_field :picture %></p>
 				<p><%= f.submit "Tweet" %></p>
 	    	<% end %>	
-	    </div>
-  	</div>
-    <div class="col-md-8 tweet">
+	   </div>
+</div>
+<div class="col-md-8 tweet">
 		<h4>Timeline</h4>	
-		<% @tweets.each do |t| %>
-			<table>
-				<tr>
-					<% if t.user.profile.present? %>
-						<% @turl = t.user.profile.avatar.url %>
-					<% else %>
-						<% @turl = "default.png" %>
-					<% end %>
-					<td>
-					<p class="image"><%= image_tag @turl, width: 60, height: 60, class: "image2" %></p>
-					Post by <strong>@<%= t.user.username %></strong> <%= time_ago_in_words(t.created_at) %> ago.<br />
-					<font color="blue"><%= t.text %></font>
-					<% if t.user == current_user %>
-						<%= link_to 'X', user_tweet_path(@user, t), method: :delete, 
-						data: { confirm: 'Are you sure?' } %>
-					<% end %>
-					<br /><% if t.picture? %><%= image_tag t.picture.url, class: "picture" %><% end %>
-					</td>
-				</tr>
-				<tr>
-					<td>
-					<%= form_for([t.user, t, t.user.comments.build]) do |fc| %>
-						<div class="freply">
-						<p><%= fc.text_area :text, size: "65x2" %></p>
-						<p><%= fc.submit "Reply"%></p>
-						</div>
-					<% end %>
-					</td>
-				</tr>
-				<tr>
-					<td>
-					<% t.comments.each do |c| %>
-					<tr class="reply">
-						<% if c.user.profile.present? %>
-							<% @curl = c.user.profile.avatar.url %>
-						<% else %>
-							<% @curl = "default.png" %>
-						<% end %>
-						<td>
-						<div class="lreply">
-						<p class="image"><%= image_tag @curl, width: 50, height: 50, class: "image2" %></p>
-						Reply by <strong>@<%= c.user.username %></strong> <%= time_ago_in_words(c.created_at) %> ago.<br />
-						<%= c.text %>
-						<% if c.user == current_user %>
-							<%= link_to 'X', [c.user, c.tweet, c],
-               								method: :delete,
-               								data: { confirm: 'Are you sure?' } %>
-               			<% end %>
-               			</div>
-						</td>
-					</tr>
-					<% end %>
-					</td>
-				</tr>
-			</table>
-		<% end %>
-    </div>
+  		<%= render 'form_tweet' %>
 </div>
