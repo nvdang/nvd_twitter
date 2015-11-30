@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <div class="col-md-4 block">
 		<p class="image"><%= image_tag @url, width: 90, height: 90, class: "image2" %></p>
 	      <%= link_to @user.username, show_path(@user) %></strong><br />
@@ -12,7 +9,7 @@
 			<strong id="followers"><%= @user.followers.count %> </strong>followers
 		</div>
 		<div class="tfield">
-	    	<%= form_for([@user, @user.tweets.build], html: { multipart: true, id: "p_tweet" }) do |f| %>
+	    	<%= form_for([@user, @user.tweets.build], html: { multipart: true, class: "p_tweet" }) do |f| %>
 	    	<% if flash[:error] %>
 	    	<% flash.each do |key, value| %>
 			  <div class="alert alert-<%= key %>">
@@ -21,7 +18,7 @@
 			  </div>
 			<% end %>
 			<% end %>
-	    		<p><%= f.text_area :text, size: "32x5" %></p>
+	    		<p><%= f.text_area :text, size: "32x5", class: "typeahead" %></p>
 				<p><%= f.file_field :picture %></p>
 				<p><%= f.submit "Tweet" %></p>
 	    	<% end %>	

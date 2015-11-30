@@ -16,3 +16,17 @@
 //= require jquery-ui
 //= require turbolinks
 //= require_tree .
+
+var ready = function() {
+    $('.typeahead').autocomplete({
+      source: "/tweets/suggest",
+      minLength: 1,
+      select: function(event, ui) {
+        $('.typeahead').val(ui.item.value);
+        $('.typeahead').submit();
+      }
+    });
+}
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

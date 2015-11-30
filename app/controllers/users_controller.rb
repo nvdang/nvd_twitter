@@ -23,8 +23,8 @@ class UsersController < ApplicationController
         @path = new_user_profile_path(@user)
       end
     end
- end
-   
+  end
+  
   def following
     @users = User.all
   end

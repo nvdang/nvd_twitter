@@ -11,13 +11,17 @@ class TweetsController < ApplicationController
         @path = new_user_profile_path(@user)
       end
     end
-    
-     if @user.following.present?
+  end
+  
+  def suggest
+    @user = current_user
+    if @user.following.present?
        @users_following = @user.following
      else
        @users_following = []
      end
-     @users = User.all
+    @users = @users_following.order(:username).where("username like ?", "%#{params[:term]}%")  
+    render json: @users.map(&:username) 
   end
   
   def create
