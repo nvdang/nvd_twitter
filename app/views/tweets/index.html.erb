@@ -9,7 +9,7 @@
 			<strong id="followers"><%= @user.followers.count %> </strong>followers
 		</div>
 		<div class="tfield">
-	    	<%= form_for([@user, @user.tweets.build], html: { multipart: true, class: "p_tweet" }) do |f| %>
+	    	<%= form_for([@user, @user.tweets.build], html: { multipart: true, class: "p_tweet", remote: true }) do |f| %>
 	    	<% if flash[:error] %>
 	    	<% flash.each do |key, value| %>
 			  <div class="alert alert-<%= key %>">

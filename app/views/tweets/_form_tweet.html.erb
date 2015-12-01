@@ -23,7 +23,7 @@
 					<td>
 					<%= form_for([t.user, t, t.user.comments.build]) do |fc| %>
 						<div class="freply">
-						<p><%= fc.text_area :text, size: "65x2" %></p>
+						<p><%= fc.text_area :text, size: "65x2", class: "typeahead" %></p>
 						<p><%= fc.submit "Reply"%></p>
 						</div>
 					<% end %>
