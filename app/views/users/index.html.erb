@@ -1,23 +1,21 @@
 <div>
 <% if user_signed_in? %>
-  	<div class="col-md-4 block">
-      <p class="image"><%= image_tag @url, width: 100, height: 100, class: "image1" %></p>
+  	<div class="col-xs-6 col-sm-3 block">
+      <p class="image"><%= image_tag @url, width: 80, height: 80, class: "image1" %></p>
       <br /><%= link_to @user.username, show_path(@user) %><br />
       <span><%= link_to "profile", @path %></span>
       <div>
-		<a href="<%= following_user_path(@user) %>">
 		    <strong id="following" class="stat">
 		      <%= @user.following.count %>
 		    </strong>
 		    following<br />
-		  </a>
 		    <strong id="followers" class="stat">
 		      <%= @user.followers.count %>
 		    </strong>
 		     followers
 		</div>
   	</div>
-  	<div class="col-md-4 block">
+  	<div class="col-xs-6 col-sm-3 block">
 	  	<h4>Following</h4>
 	  	<table>
 				<% @users_following.each do |uf| %>
@@ -25,17 +23,17 @@
 							<td>
 								<% if uf.profile.present? %>
 									<p class="image"><%= image_tag uf.profile.avatar.url, width: 50, height: 50, class: "image2" %></p>
-									<%= link_to uf.username, show_path(uf) %>
+									<%= link_to uf.username, show_path(uf), target: "_blank" %>
 								<% else %>
 									<p class="image"><%= image_tag "default.png", width: 50, height: 50, class: "image2" %></p>
-									<%= link_to uf.username, show_path(uf) %>
+									<%= link_to uf.username, show_path(uf), target: "_blank" %>
 								<% end %>
 							</td>
 						</tr>
 				<% end %>
 		</table>
 	  </div>
-	  <div class="col-md-4 block">
+	  <div class="col-xs-6 col-sm-3 block">
 		<h4>Follower</h4>
 		<table>
 				<% @users_follower.each do |uf| %>
@@ -43,10 +41,28 @@
 							<td>
 							<% if uf.profile.present? %>
 								<p class="image"><%= image_tag uf.profile.avatar.url, width: 50, height: 50, class: "image2" %></p>
-								<%= link_to uf.username, show_path(uf) %>
+								<%= link_to uf.username, show_path(uf), target: "_blank" %>
 							<% else %>
 								<p class="image"><%= image_tag "default.png", width: 50, height: 50, class: "image2" %></p>
-								<%= link_to uf.username, show_path(uf) %>
+								<%= link_to uf.username, show_path(uf), target: "_blank" %>
+							<% end %>
+							</td>
+						</tr>
+				<% end %>
+		</table>
+	  </div>
+	  <div class="col-xs-6 col-sm-3 block">
+		<h4>All User</h4>
+		<table>
+				<% @users.each do |uf| %>
+						<tr>
+							<td>
+							<% if uf.profile.present? %>
+								<p class="image"><%= image_tag uf.profile.avatar.url, width: 50, height: 50, class: "image2" %></p>
+								<%= link_to uf.username, show_path(uf), target: "_blank" %>
+							<% else %>
+								<p class="image"><%= image_tag "default.png", width: 50, height: 50, class: "image2" %></p>
+								<%= link_to uf.username, show_path(uf), target: "_blank" %>
 							<% end %>
 							</td>
 						</tr>

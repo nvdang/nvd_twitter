@@ -3,9 +3,7 @@
 	      <%= link_to @user.username, show_path(@user) %></strong><br />
 	      <span><%= link_to "profile", @path %></span>
 	    <div>
-			<a href="<%= following_user_path(@user) %>">
-				<strong id="following"><%= @user.following.count %></strong> following<br />
-			</a>
+			<strong id="following"><%= @user.following.count %></strong> following<br />
 			<strong id="followers"><%= @user.followers.count %> </strong>followers
 		</div>
 		<div class="tfield">
@@ -25,6 +23,10 @@
 	   </div>
 </div>
 <div class="col-md-8 tweet">
-		<h4>Timeline</h4>	
-  		<%= render 'form_tweet' %>
+	<h4>Timeline</h4>
+	<div id="posts">	
+		<%= render @tweets %>
+	</div>
+	<%= will_paginate @tweets %>
 </div>
+

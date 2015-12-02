@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def index
      @user = current_user
-     
+     @users = User.all
      if @user.following.present?
        @users_following = @user.following
      else
@@ -23,10 +23,6 @@ class UsersController < ApplicationController
         @path = new_user_profile_path(@user)
       end
     end
-  end
-  
-  def following
-    @users = User.all
   end
   
   def show

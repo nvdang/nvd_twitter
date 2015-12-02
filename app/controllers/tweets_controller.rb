@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
   def index
     @user = current_user
-    @tweets = current_user.feed.order("created_at DESC")
+    @tweets = current_user.feed.paginate(page: params[:page], per_page: 10).order("created_at DESC")
     if user_signed_in?
       if current_user.profile.present?
         @url = current_user.profile.avatar.url
@@ -28,7 +28,11 @@ class TweetsController < ApplicationController
     @user = current_user
     @tweet = @user.tweets.build(tweet_params)
       if @tweet.save
-        redirect_to user_tweets_path
+        respond_to do |format|
+          format.html { redirect_to user_tweets_url }
+          format.js 
+        end
+        #redirect_to user_tweets_path
       else
         flash[:error] = "Text field can't be blank or too longs"
         redirect_to user_tweets_path

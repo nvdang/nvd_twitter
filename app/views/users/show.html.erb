@@ -5,6 +5,16 @@
 			<strong id="following"><%= @user.following.count %></strong> following<br />
 			<strong id="followers"><%= @user.followers.count %> </strong>followers
 		</div>
+		<% if current_user.username == @user.username %>
+		<% else %>
+			<div id="follow_form">
+				<% if current_user.following?(@user) %>
+					<%= render 'unfollow' %>
+				<% else %>
+					<%= render 'follow' %>
+				<% end %>
+			</div>
+		<% end %>
 </div>
 <div class="col-md-8 tweet">
 	<h4>Tweets</h4>
@@ -20,3 +30,4 @@
 				</tr>
 	<% end %>
 <div>
+	

@@ -5,7 +5,11 @@ class CommentsController < ApplicationController
     @comment.tweet = @tweet
     @comment.user = current_user
     if @comment.save
-       redirect_to user_tweets_path
+      respond_to do |format|
+          format.html { redirect_to user_tweets_url }
+          format.js 
+      end
+       #redirect_to user_tweets_path
     else
        flash[:error] = "Reply with text field can't be blank or too long"
        redirect_to user_tweets_path

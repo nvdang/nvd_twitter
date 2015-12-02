@@ -81,7 +81,7 @@ table{
 }
 .image{
 	float: left;
-	padding-right: 10px;
+	padding-right: 5px;
 }
 
 .image1{
@@ -89,7 +89,7 @@ table{
 	border-radius: 10px 10px 10px 10px;
 	-moz-border-radius: 10px 10px 10px 10px;
 	-webkit-border-radius: 10px 10px 10px 10px;
-	margin-top: 10px;
+	margin-top: 20px;
 }
 
 .image2{
@@ -122,7 +122,7 @@ table{
 	-webkit-border-radius: 10px 10px 10px 10px;
 }
 .btn1{
-	margin: 15px;
+	margin: 0px;
 }
 
 .reply{
@@ -181,3 +181,4 @@ table{
     *border-right-width: 2px;
     *border-bottom-width: 2px;
 }
+
