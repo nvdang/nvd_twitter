@@ -23,10 +23,10 @@
 							<td>
 								<% if uf.profile.present? %>
 									<p class="image"><%= image_tag uf.profile.avatar.url, width: 50, height: 50, class: "image2" %></p>
-									<%= link_to uf.username, show_path(uf), target: "_blank" %>
+									<%= link_to uf.username, show_path(uf) %>
 								<% else %>
 									<p class="image"><%= image_tag "default.png", width: 50, height: 50, class: "image2" %></p>
-									<%= link_to uf.username, show_path(uf), target: "_blank" %>
+									<%= link_to uf.username, show_path(uf) %>
 								<% end %>
 							</td>
 						</tr>
@@ -41,10 +41,10 @@
 							<td>
 							<% if uf.profile.present? %>
 								<p class="image"><%= image_tag uf.profile.avatar.url, width: 50, height: 50, class: "image2" %></p>
-								<%= link_to uf.username, show_path(uf), target: "_blank" %>
+								<%= link_to uf.username, show_path(uf) %>
 							<% else %>
 								<p class="image"><%= image_tag "default.png", width: 50, height: 50, class: "image2" %></p>
-								<%= link_to uf.username, show_path(uf), target: "_blank" %>
+								<%= link_to uf.username, show_path(uf) %>
 							<% end %>
 							</td>
 						</tr>
@@ -59,10 +59,10 @@
 							<td>
 							<% if uf.profile.present? %>
 								<p class="image"><%= image_tag uf.profile.avatar.url, width: 50, height: 50, class: "image2" %></p>
-								<%= link_to uf.username, show_path(uf), target: "_blank" %>
+								<%= link_to uf.username, show_path(uf) %>
 							<% else %>
 								<p class="image"><%= image_tag "default.png", width: 50, height: 50, class: "image2" %></p>
-								<%= link_to uf.username, show_path(uf), target: "_blank" %>
+								<%= link_to uf.username, show_path(uf) %>
 							<% end %>
 							</td>
 						</tr>

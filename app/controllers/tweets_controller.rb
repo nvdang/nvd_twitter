@@ -1,8 +1,8 @@
 class TweetsController < ApplicationController
   def index
-    @user = current_user
-    @tweets = current_user.feed.paginate(page: params[:page], per_page: 10).order("created_at DESC")
     if user_signed_in?
+      @user = current_user
+      @tweets = current_user.feed.paginate(page: params[:page], per_page: 10).order("created_at DESC")
       if current_user.profile.present?
         @url = current_user.profile.avatar.url
         @path = user_profile_path(@user, @user.profile)
@@ -11,15 +11,19 @@ class TweetsController < ApplicationController
         @path = new_user_profile_path(@user)
       end
     end
+    respond_to do |format|
+        format.html
+        format.js
+    end
   end
   
   def suggest
     @user = current_user
     if @user.following.present?
        @users_following = @user.following
-     else
+    else
        @users_following = []
-     end
+    end
     @users = @users_following.order(:username).where("username like ?", "%#{params[:term]}%")  
     render json: @users.map(&:username) 
   end
@@ -27,16 +31,15 @@ class TweetsController < ApplicationController
   def create
     @user = current_user
     @tweet = @user.tweets.build(tweet_params)
+    respond_to do |format|
       if @tweet.save
-        respond_to do |format|
-          format.html { redirect_to user_tweets_url }
-          format.js 
-        end
-        #redirect_to user_tweets_path
+        format.html { redirect_to user_tweets_url }
+        format.js 
       else
-        flash[:error] = "Text field can't be blank or too longs"
-        redirect_to user_tweets_path
+        format.html
+        format.js { render "error.js.erb" }
       end
+    end
   end
   
   def destroy

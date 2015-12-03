@@ -58,7 +58,7 @@ table{
 	margin-right: auto;
 }
 
-.tweet table{
+#posts table{
 	width: 100%;
 	margin-bottom: 30px;
 	border: 1px solid #CFCFCF;
@@ -100,10 +100,19 @@ table{
 }
 
 .tfield{
-	margin-top: 30px;
+	margin-top: 20px;
+	margin-bottom: 20px;
   	background-color: #fff;
   	border: 1px solid #fff;
 }
+
+.tfield input[type="text"]{
+	width: 500px;
+	height: 50px;
+	border: 1px solid #CFCFCF;
+	word-break: keep-all;
+}
+
 .block{
 	border: 1px solid #fff;
 }

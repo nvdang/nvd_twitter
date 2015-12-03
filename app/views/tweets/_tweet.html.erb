@@ -1,4 +1,4 @@
-<div class="post">
+
 	<table>
 				<tr>
 					<% if tweet.user.profile.present? %>
@@ -16,8 +16,6 @@
 										data: { confirm: 'Are you sure?' },
 										remote: true, class: "delete_tweet" %>
 					<% end %>
-					<br /><% if tweet.picture? %><%= image_tag tweet.picture.url, class: "picture" %><% end %>
 					</td>
 				</tr>
 	</table>
-</div>

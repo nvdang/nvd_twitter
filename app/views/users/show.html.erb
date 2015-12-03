@@ -18,6 +18,7 @@
 </div>
 <div class="col-md-8 tweet">
 	<h4>Tweets</h4>
+	<div id="posts">
 	<% @user.tweets.each do |t| %>
 			<table>
 				<tr>
@@ -29,5 +30,6 @@
 					</td>
 				</tr>
 	<% end %>
+	</div>
 <div>
 	

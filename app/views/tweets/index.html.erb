@@ -6,27 +6,23 @@
 			<strong id="following"><%= @user.following.count %></strong> following<br />
 			<strong id="followers"><%= @user.followers.count %> </strong>followers
 		</div>
-		<div class="tfield">
-	    	<%= form_for([@user, @user.tweets.build], html: { multipart: true, class: "p_tweet", remote: true }) do |f| %>
-	    	<% if flash[:error] %>
-	    	<% flash.each do |key, value| %>
-			  <div class="alert alert-<%= key %>">
-			    <a href="#" data-dismiss="alert" class="close">×</a>
-			    <font color="red"><%= value %></font>
-			  </div>
-			<% end %>
-			<% end %>
-	    		<p><%= f.text_area :text, size: "32x5", class: "typeahead" %></p>
-				<p><%= f.file_field :picture %></p>
-				<p><%= f.submit "Tweet" %></p>
-	    	<% end %>	
-	   </div>
 </div>
 <div class="col-md-8 tweet">
 	<h4>Timeline</h4>
+	<div class="tfield">
+	    	<%= form_for([@user, @user.tweets.build], html: { multipart: true, class: "p_tweet", remote: true }) do |f| %>
+	    		<div id="error">
+	    			
+	    		</div>
+	    		<p><%= f.text_field :text, class: "typeahead" %></p>
+				<p><%= f.submit "Tweet" %></p>
+	    	<% end %>
+	</div>
 	<div id="posts">	
 		<%= render @tweets %>
 	</div>
-	<%= will_paginate @tweets %>
+	<div id="scrolling">
+		<%= will_paginate @tweets %>
+	</div>
 </div>
 
