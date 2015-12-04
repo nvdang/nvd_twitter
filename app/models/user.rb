@@ -2,8 +2,6 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   attr_accessor :login
-  #acts_as_followable
-  #acts_as_follower
   has_one :profile
   has_many :tweets
   has_many :comments
@@ -31,8 +29,7 @@ class User < ActiveRecord::Base
     end
   end
   
-  devise :database_authenticatable, :registerable, :omniauthable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
          
   #Feed
   def feed
@@ -65,31 +62,6 @@ class User < ActiveRecord::Base
       else
         where(username: conditions[:username]).first
       end
-    end
-  end
-  
-  #def self.search(term)
-    #where('username like ?', "%#{term}%")
-  #end
-  
-  def self.find_for_twitter_oauth(auth, signed_in_resource=nil)
-    user = User.where(:provider => auth.provider, :uid => auth.uid).first
-    if user
-      return user
-    else
-      registered_user = User.where(:email => auth.uid + "@twitter.com").first
-      if registered_user
-        return registered_user
-      else
-
-        user = User.create(username:auth.extra.raw_info.username,
-                            provider:auth.provider,
-                            uid:auth.uid,
-                            email:auth.uid+"@twitter.com",
-                            password:Devise.friendly_token[0,20],
-                          )
-      end
-
     end
   end
 end

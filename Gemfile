@@ -25,10 +25,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'omniauth'
+# gem 'omniauth'
 gem 'devise'
-gem 'omniauth-twitter'
-gem 'twitter'
+# gem 'omniauth-twitter'
+# gem 'twitter'
 gem 'bootstrap-sass-rails'
 gem 'paperclip'
 gem 'pry'

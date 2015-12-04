@@ -1,20 +1,20 @@
 class UsersController < ApplicationController
   def index
-    @user = current_user
-    @users = User.all
-    if @user.following.present?
-      @users_following = @user.following
-    else
-      @users_following = []
-    end
-     
-    if @user.followers.present?
-      @users_follower = @user.followers
-    else
-      @users_follower = []
-    end
-     
     if user_signed_in?
+      @user = current_user
+      @users = User.all
+      if @user.following.present?
+        @users_following = @user.following
+      else
+        @users_following = []
+      end
+       
+      if @user.followers.present?
+        @users_follower = @user.followers
+      else
+        @users_follower = []
+      end
+   
       if current_user.profile.present?
         @url = current_user.profile.avatar.url
         @path = user_profile_path(@user, @user.profile)
