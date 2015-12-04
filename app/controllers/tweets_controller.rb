@@ -5,14 +5,14 @@ class TweetsController < ApplicationController
     if current_user.profile.present?
       @url = current_user.profile.avatar.url
       @path = user_profile_path(@user, @user.profile)
-     else
-        @url = "default.png"
-        @path = new_user_profile_path(@user)
-      end
-      respond_to do |format|
-        format.html
-        format.js
-      end
+    else
+      @url = "default.png"
+      @path = new_user_profile_path(@user)
+    end
+    respond_to do |format|
+       format.html
+       format.js
+    end
   end
   
   def suggest

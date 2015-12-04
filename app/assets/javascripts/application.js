@@ -17,8 +17,6 @@
 //= require turbolinks
 //= require_tree .
 
-
-
 var ready = function() {
 	function split( val ) {
       return val.split( /@\s*/ );
