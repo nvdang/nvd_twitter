@@ -1,21 +1,20 @@
-
-	<table>
-				<tr>
-					<% if tweet.user.profile.present? %>
-						<% @turl = tweet.user.profile.avatar.url %>
-					<% else %>
-						<% @turl = "default.png" %>
-					<% end %>
-					<td>
-					<p class="image"><%= image_tag @turl, width: 60, height: 60, class: "image2" %></p>
-					Post by <strong><%= link_to tweet.user.username, show_path(tweet.user) %></strong> <%= time_ago_in_words(tweet.created_at) %> ago.<br />
-					<font color="blue"><%= tweet.text %></font>
-					<% if tweet.user == current_user %>
-						<%= link_to 'X', user_tweet_path(@user, tweet), 
-										method: :delete, 
-										data: { confirm: 'Are you sure?' },
-										remote: true, class: "delete_tweet" %>
-					<% end %>
-					</td>
-				</tr>
-	</table>
+<table>
+	<tr>
+		<% if tweet.user.profile.present? %>
+			<% @turl = tweet.user.profile.avatar.url %>
+		<% else %>
+			<% @turl = "default.png" %>
+		<% end %>
+		<td>
+		<p class="image"><%= image_tag @turl, width: 60, height: 60, class: "image2" %></p>
+		Post by <strong><%= link_to tweet.user.username, show_path(tweet.user) %></strong> <%= time_ago_in_words(tweet.created_at) %> ago.<br />
+		<font color="blue"><%= tweet.text %></font>
+		<% if tweet.user == current_user %>
+			<%= link_to 'X', user_tweet_path(@user, tweet), 
+							method: :delete, 
+							data: { confirm: 'Are you sure?' },
+							remote: true, class: "delete_tweet" %>
+		<% end %>
+		</td>
+	</tr>
+</table>

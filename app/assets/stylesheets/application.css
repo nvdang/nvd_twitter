@@ -106,11 +106,11 @@ table{
   	border: 1px solid #fff;
 }
 
-.tfield input[type="text"]{
+.tfield textarea{
 	width: 500px;
 	height: 50px;
 	border: 1px solid #CFCFCF;
-	word-break: keep-all;
+	resize: none;
 }
 
 .block{

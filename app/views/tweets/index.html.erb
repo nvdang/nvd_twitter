@@ -11,10 +11,9 @@
 	<h4>Timeline</h4>
 	<div class="tfield">
 	    	<%= form_for([@user, @user.tweets.build], html: { multipart: true, class: "p_tweet", remote: true }) do |f| %>
-	    		<div id="error">
-	    			
+	    		<div id="error">	
 	    		</div>
-	    		<p><%= f.text_field :text, class: "typeahead" %></p>
+	    		<p><%= f.text_area :text, class: "typeahead" %></p>
 				<p><%= f.submit "Tweet" %></p>
 	    	<% end %>
 	</div>

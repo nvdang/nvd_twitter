@@ -5,15 +5,9 @@
       <br /><%= link_to @user.username, show_path(@user) %><br />
       <span><%= link_to "profile", @path %></span>
       <div>
-		    <strong id="following" class="stat">
-		      <%= @user.following.count %>
-		    </strong>
-		    following<br />
-		    <strong id="followers" class="stat">
-		      <%= @user.followers.count %>
-		    </strong>
-		     followers
-		</div>
+		    <strong id="following" class="stat"><%= @user.following.count %></strong> following<br />
+		    <strong id="followers" class="stat"><%= @user.followers.count %></strong> followers
+	  </div>
   	</div>
   	<div class="col-xs-6 col-sm-3 block">
 	  	<h4>Following</h4>

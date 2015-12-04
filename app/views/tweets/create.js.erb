@@ -1,3 +1,13 @@
 $('.p_tweet').bind('ajax:success', function() {
-   $("#posts").html('<% @tweets = current_user.feed.paginate(page: params[:page], per_page: 10).order("created_at DESC") %>' + '<%= escape_javascript(render @tweets) %>');
+   $('#posts').html('<% @tweets = current_user.feed.paginate(page: params[:page], per_page: 10).order("created_at DESC") %>' + '<%= escape_javascript(render @tweets) %>');
 });
+
+<% if @tweet.errors.any? %>
+   $('#error').html('<font color="red" size="4px">'
+   					 +'<%= @tweet.errors.full_messages.first %>')
+   					 +'</font>'
+<% else %>
+   $('#error').html('');
+<% end %>
+
+ 

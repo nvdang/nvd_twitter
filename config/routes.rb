@@ -5,9 +5,7 @@ Rails.application.routes.draw do
           get :following
         end
         resources :profiles 
-         resources :tweets do
-        resources :comments
-        end
+         resources :tweets
       end
       resources :relationships, only: [:create, :destroy]
   root 'profiles#index'

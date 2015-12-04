@@ -1,28 +1,26 @@
 class TweetsController < ApplicationController
   def index
-    if user_signed_in?
-      @user = current_user
-      @tweets = current_user.feed.paginate(page: params[:page], per_page: 10).order("created_at DESC")
-      if current_user.profile.present?
-        @url = current_user.profile.avatar.url
-        @path = user_profile_path(@user, @user.profile)
-      else
+    @user = current_user
+    @tweets = current_user.feed.paginate(page: params[:page], per_page: 10).order("created_at DESC")
+    if current_user.profile.present?
+      @url = current_user.profile.avatar.url
+      @path = user_profile_path(@user, @user.profile)
+     else
         @url = "default.png"
         @path = new_user_profile_path(@user)
       end
-    end
-    respond_to do |format|
+      respond_to do |format|
         format.html
         format.js
-    end
+      end
   end
   
   def suggest
     @user = current_user
     if @user.following.present?
-       @users_following = @user.following
+      @users_following = @user.following
     else
-       @users_following = []
+      @users_following = []
     end
     @users = @users_following.order(:username).where("username like ?", "%#{params[:term]}%")  
     render json: @users.map(&:username) 
@@ -36,8 +34,9 @@ class TweetsController < ApplicationController
         format.html { redirect_to user_tweets_url }
         format.js 
       else
-        format.html
-        format.js { render "error.js.erb" }
+        format.html { redirect_to user_tweets_url }
+        format.json { render json: @tweet.errors }
+        format.js
       end
     end
   end
