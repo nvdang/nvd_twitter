@@ -13,17 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20151120071812) do
 
-  create_table "comments", force: :cascade do |t|
-    t.string   "commenter"
-    t.text     "text"
-    t.integer  "tweet_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "user_id"
-  end
-
-  add_index "comments", ["tweet_id"], name: "index_comments_on_tweet_id"
-
   create_table "follows", force: :cascade do |t|
     t.integer  "followable_id",                   null: false
     t.string   "followable_type",                 null: false
